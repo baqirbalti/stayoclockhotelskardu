@@ -2,13 +2,20 @@
  * Images live under `public/images/rooms/` and `public/images/gallery/`.
  */
 
+/** Local PK mobile (03xx…) → `tel:+92…` */
+export function pkPhoneTelHref(local: string): string {
+  const digits = local.replace(/\D/g, "");
+  const national = digits.startsWith("0") ? digits.slice(1) : digits;
+  return `tel:+92${national}`;
+}
+
 export const hotelInfo = {
   name: "Stay O'Clock",
   tagline: "Hotel & Restaurant",
   location: "Skardu, Pakistan",
   address: "Near Abdullah Hospital, Clifton Pul, Skardu",
   phones: ["03111556691", "03554439318", "03433331222"],
-  email: "Stayoclockhotel@gmaill.com",
+  email: "Stayoclockhotel@gmail.com",
   whatsapp: "923433331222",
   social: {
     instagram: "https://www.instagram.com/stayoclockhotel",

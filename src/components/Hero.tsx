@@ -1,22 +1,23 @@
 import { useEffect, useState } from "react";
 import { ChevronDown, MapPin } from "lucide-react";
+import { hotelInfo } from "../data/hotelData";
+
+/** Files in `public/images/gallery/` are served at `/images/gallery/...` */
+const GALLERY = "/images/gallery";
 
 const slides = [
   {
-    image:
-      "https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    image: `${GALLERY}/exterior-dusk.png`,
     headline: "Where Mountains Meet Luxury",
     sub: "Experience the finest hospitality in the heart of Skardu",
   },
   {
-    image:
-      "https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    image: `${GALLERY}/${encodeURIComponent("WhatsApp Image 2026-05-12 at 5.03.52 PM.jpeg")}`,
     headline: "Your Gateway to the Karakoram",
     sub: "Comfort, elegance, and breathtaking views await you",
   },
   {
-    image:
-      "https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1920",
+    image: `${GALLERY}/exterior-night.png`,
     headline: "Rest. Explore. Return.",
     sub: "A project of Qadeeri Group of Businesses, Skardu",
   },
@@ -52,8 +53,10 @@ export default function Hero() {
         >
           <img
             src={slide.image}
-            alt=""
+            alt={slide.headline}
             className="w-full h-full object-cover"
+            decoding="async"
+            fetchPriority={i === 0 ? "high" : "low"}
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
         </div>
@@ -77,7 +80,7 @@ export default function Hero() {
 
           <div className="flex flex-col sm:flex-row items-center gap-4 justify-center">
             <a
-              href="https://wa.me/923433331222"
+              href={`https://wa.me/${hotelInfo.whatsapp}`}
               target="_blank"
               rel="noopener noreferrer"
               className="bg-hotel-accent hover:bg-hotel-accent-hover text-black font-bold text-sm tracking-widest uppercase px-8 py-4 transition-all duration-300 hover:shadow-[0_0_30px_rgba(201,160,68,0.5)] min-w-[200px] text-center"

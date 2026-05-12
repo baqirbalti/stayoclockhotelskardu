@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import { hotelInfo } from "../data/hotelData";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -78,7 +79,7 @@ export default function Navbar() {
         </ul>
 
         <a
-          href="https://wa.me/923111556691"
+          href={`https://wa.me/${hotelInfo.whatsapp}`}
           target="_blank"
           rel="noopener noreferrer"
           className="hidden items-center gap-2 bg-hotel-accent px-5 py-2.5 text-xs font-semibold uppercase tracking-widest text-black transition-all duration-300 hover:bg-hotel-accent-hover hover:shadow-[0_0_20px_rgba(201,160,68,0.35)] md:flex"
@@ -106,7 +107,7 @@ export default function Navbar() {
             ))}
             <li>
               <a
-                href="https://wa.me/923111556691"
+                href={`https://wa.me/${hotelInfo.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 block bg-hotel-accent px-5 py-3 text-center text-xs font-semibold uppercase tracking-widest text-black"

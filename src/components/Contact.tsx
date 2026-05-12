@@ -1,5 +1,5 @@
 import { Phone, MessageCircle } from "lucide-react";
-import { hotelInfo } from "../data/hotelData";
+import { hotelInfo, pkPhoneTelHref } from "../data/hotelData";
 
 export default function Contact() {
   const primaryPhone = hotelInfo.phones[0];
@@ -30,7 +30,7 @@ export default function Contact() {
                 WhatsApp Booking
               </a>
               <a
-                href={`tel:+92${primaryPhone}`}
+                href={pkPhoneTelHref(primaryPhone)}
                 className="flex items-center justify-center gap-3 border border-slate-300 bg-white/80 font-semibold text-sm uppercase tracking-widest text-slate-800 transition-all duration-300 hover:border-hotel-accent hover:text-hotel-accent whitespace-nowrap px-8 py-4"
               >
                 <Phone className="w-5 h-5" />

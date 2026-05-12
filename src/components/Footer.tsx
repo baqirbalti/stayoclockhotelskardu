@@ -1,5 +1,5 @@
 import { Phone, Mail, MapPin, Instagram, Facebook, MessageCircle } from "lucide-react";
-import { hotelInfo } from "../data/hotelData";
+import { hotelInfo, pkPhoneTelHref } from "../data/hotelData";
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -100,7 +100,7 @@ export default function Footer() {
                 <li key={phone} className="flex items-center gap-3">
                   <Phone className="w-3.5 h-3.5 text-hotel-accent flex-shrink-0" />
                   <a
-                    href={`tel:+92${phone}`}
+                    href={pkPhoneTelHref(phone)}
                     className="text-sm text-slate-400 transition-colors duration-300 hover:text-hotel-accent"
                   >
                     {phone}
