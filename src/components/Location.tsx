@@ -2,7 +2,7 @@ import { MapPin, Navigation } from "lucide-react";
 
 export default function Location() {
   const googleMapsUrl =
-    "https://www.google.com/maps/search/Stay+O'Clock+Hotel+Skardu+near+Abdullah+Hospital+Clifton+Pul/@35.2971,75.6379,15z";
+  "https://www.google.com/maps/place/Stay+O+Clock+Hotel/@35.2893901,75.6194413,539m/data=!3m1!1e3!4m9!3m8!1s0x38e4630061cabb4d:0x7fdcbc6dbaa2a6f7!5m2!4m1!1i2!8m2!3d35.2893901!4d75.6220162!16s%2Fg%2F11xs2v3thv?entry=ttu&g_ep=EgoyMDI2MDUxMS4wIKXMDSoASAFQAw%3D%3D";
 
   return (
     <section id="location" className="bg-hotel-page py-24 px-6">

@@ -1,5 +1,6 @@
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
+import QuickBooking from "./components/QuickBooking";
 import About from "./components/About";
 import Rooms from "./components/Rooms";
 import Gallery from "./components/Gallery";
@@ -14,6 +15,7 @@ function App() {
     <div className="min-h-screen bg-hotel-page text-slate-800">
       <Navbar />
       <Hero />
+      <QuickBooking />
       <About />
       <Rooms />
       <Gallery />

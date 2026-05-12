@@ -19,7 +19,7 @@ const slides = [
   {
     image: `${GALLERY}/exterior-night.png`,
     headline: "Rest. Explore. Return.",
-    sub: "A project of Qadeeri Group of Businesses, Skardu",
+    sub: "Proudly Balti-owned — A project of Qadeeri Family Businesses, Skardu.",
   },
 ];
 
@@ -69,7 +69,7 @@ export default function Hero() {
           }`}
         >
           <p className="text-hotel-accent text-xs tracking-[0.4em] uppercase mb-4 font-medium">
-            Stay O'Clock Hotel & Restaurant
+            
           </p>
           <h1 className="text-white text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-4 max-w-4xl">
             {slides[current].headline}
@@ -96,15 +96,15 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3">
+        <div className="absolute bottom-10 left-1/2 z-10 flex -translate-x-1/2 items-center gap-3 sm:bottom-12">
           <MapPin className="w-3.5 h-3.5 text-hotel-accent" />
           <span className="text-white/60 text-xs tracking-widest uppercase">
-            Near Abdullah Hospital, Clifton Pul, Skardu
+            
           </span>
         </div>
       </div>
 
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex gap-2">
+      <div className="absolute bottom-28 left-1/2 z-10 flex -translate-x-1/2 gap-2 sm:bottom-32">
         {slides.map((_, i) => (
           <button
             key={i}

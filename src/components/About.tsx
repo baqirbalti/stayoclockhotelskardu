@@ -12,10 +12,13 @@ export default function About() {
           </h2>
           <div className="w-16 h-px bg-hotel-accent mb-8" />
           <p className="text-slate-600 leading-relaxed mb-6 text-base">
-            Stay O'Clock Hotel & Restaurant is Skardu's premier hospitality destination, perfectly positioned near Abdullah Hospital at Clifton Pul. We are a proud project of the Qadeeri Group of Businesses, committed to delivering exceptional comfort and authentic warmth to every traveler who walks through our doors.
+          Stay O'Clock Hotel & Restaurant is one of Skardu’s finest hospitality destinations owned by Balti family, ideally located near Abdullah Hospital at Clifton Pul, Alamdar Chowk. Designed for comfort and built with care, we welcome guests with the warmth, simplicity, and genuine hospitality that Baltistan is known for.
+          </p>
+          <p className="text-slate-600 leading-relaxed mb-6 text-base">
+          Whether you’re visiting to explore the mighty Karakoram mountains, experience Skardu’s breathtaking valleys, or begin your trekking journey across legendary routes, Stay O'Clock Hotel & Restaurant serves as your perfect base — offering modern rooms, delicious cuisine, peaceful surroundings, and unforgettable panoramic views.
           </p>
           <p className="text-slate-600 leading-relaxed mb-8 text-base">
-            Whether you're here to explore the mighty Karakoram, trek the legendary passes, or simply soak in the serene beauty of Skardu, our hotel serves as your perfect base camp — offering modern amenities, delicious cuisine, and panoramic mountain views that will take your breath away.
+          We take pride in providing every guest a relaxing stay, personalized service, and an experience that feels like home.
           </p>
           <a
             href="https://wa.me/923111556691"
