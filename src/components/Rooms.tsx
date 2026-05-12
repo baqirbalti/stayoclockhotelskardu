@@ -1,103 +1,100 @@
 import { useState } from "react";
-import { ChevronLeft, ChevronRight, Users, BedDouble, Wifi, Zap, Droplets, Coffee } from "lucide-react";
+import { Users, BedDouble, Wifi, Zap, Droplets, Coffee } from "lucide-react";
 import { rooms } from "../data/hotelData";
+import type { ReactNode } from "react";
 
-const amenityIcons: Record<string, React.ReactNode> = {
+const amenityIcons: Record<string, ReactNode> = {
   WiFi: <Wifi className="w-4 h-4" />,
   Electricity: <Zap className="w-4 h-4" />,
   "Warm Water": <Droplets className="w-4 h-4" />,
   Breakfast: <Coffee className="w-4 h-4" />,
 };
 
-export default function Rooms() {
-  const [active, setActive] = useState(0);
-  const [direction, setDirection] = useState<"left" | "right">("right");
-  const [animating, setAnimating] = useState(false);
+/** Shown if `public/images/rooms/*.png` are missing or fail to load */
+const ROOM_IMAGE_FALLBACK: Record<number, string> = {
+  1: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1400&q=80",
+  2: "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1400&q=80",
+  3: "https://images.unsplash.com/photo-1631049307264-da0c9a7bcc6a?w=1400&q=80",
+};
 
-  const go = (dir: "left" | "right") => {
-    if (animating) return;
-    setDirection(dir);
-    setAnimating(true);
-    setTimeout(() => {
-      setActive((prev) => {
-        if (dir === "right") return (prev + 1) % rooms.length;
-        return (prev - 1 + rooms.length) % rooms.length;
-      });
-      setAnimating(false);
-    }, 400);
-  };
-
-  const room = rooms[active];
+function RoomImage({ roomId, src, alt }: { roomId: number; src: string; alt: string }) {
+  const [current, setCurrent] = useState(src);
 
   return (
+    <img
+      src={current}
+      alt={alt}
+      loading="lazy"
+      decoding="async"
+      className="h-full w-full object-cover object-center"
+      onError={() => {
+        const fallback = ROOM_IMAGE_FALLBACK[roomId];
+        if (fallback && current !== fallback) setCurrent(fallback);
+      }}
+    />
+  );
+}
+
+export default function Rooms() {
+  return (
     <section id="rooms" className="bg-hotel-section py-24 px-6">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="text-hotel-accent text-xs tracking-[0.4em] uppercase mb-3">Accommodations</p>
-          <h2 className="text-slate-800 text-4xl md:text-5xl font-bold mb-4">Our Rooms</h2>
-          <div className="w-16 h-px bg-hotel-accent mx-auto" />
+      <div className="mx-auto max-w-3xl">
+        <div className="mb-14 text-center">
+          <p className="mb-3 text-xs uppercase tracking-[0.4em] text-hotel-accent">Accommodations</p>
+          <h2 className="mb-4 text-4xl font-bold text-slate-800 md:text-5xl">Our Rooms</h2>
+          <div className="mx-auto h-px w-16 bg-hotel-accent" />
         </div>
 
-        <div className="relative">
-          <div
-            className={`grid lg:grid-cols-2 gap-0 overflow-hidden transition-all duration-400 ${
-              animating
-                ? direction === "right"
-                  ? "-translate-x-4 opacity-0"
-                  : "translate-x-4 opacity-0"
-                : "translate-x-0 opacity-100"
-            }`}
-            style={{ transition: "opacity 0.4s, transform 0.4s" }}
-          >
-            <div className="relative overflow-hidden group h-[420px] lg:h-auto">
-              <img
-                src={room.image}
-                alt={room.name}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-              {room.featured && (
-                <div className="absolute top-4 left-4 bg-hotel-accent text-black text-[10px] font-bold tracking-widest uppercase px-3 py-1">
-                  Most Popular
-                </div>
-              )}
-            </div>
-
-            <div className="flex flex-col justify-between border border-slate-200 bg-white p-10 shadow-sm">
-              <div>
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <h3 className="text-slate-800 text-3xl font-bold mb-1">{room.name}</h3>
-                    <div className="w-10 h-px bg-hotel-accent mb-4" />
+        <div className="flex flex-col gap-10">
+          {rooms.map((room) => (
+            <article
+              key={room.id}
+              className="overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-md shadow-slate-200/50"
+            >
+              <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 md:aspect-[2/1]">
+                <RoomImage roomId={room.id} src={room.image} alt={room.name} />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                {room.featured && (
+                  <div className="absolute left-4 top-4 bg-hotel-accent px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-black">
+                    Most Popular
                   </div>
-                  <div className="text-right">
-                    <p className="text-hotel-accent text-2xl font-bold">
+                )}
+              </div>
+
+              <div className="flex flex-col gap-6 p-8 md:p-10">
+                <div className="flex flex-col gap-4 border-b border-slate-100 pb-6 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <h3 className="text-2xl font-bold text-slate-800 md:text-3xl">{room.name}</h3>
+                    <div className="mt-2 h-px w-10 bg-hotel-accent" />
+                  </div>
+                  <div className="shrink-0 sm:text-right">
+                    <p className="text-2xl font-bold text-hotel-accent">
                       {room.pricePKR.toLocaleString()} PKR
                     </p>
-                    <p className="text-slate-500 text-sm">/ {room.priceUSD} USD per night</p>
+                    <p className="text-sm text-slate-500">/ {room.priceUSD} USD per night</p>
                   </div>
                 </div>
 
-                <p className="text-slate-600 leading-relaxed mb-8 text-sm">{room.description}</p>
+                <p className="text-sm leading-relaxed text-slate-600">{room.description}</p>
 
-                <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                   <div className="flex items-center gap-3 text-slate-700">
-                    <BedDouble className="w-4 h-4 text-hotel-accent" />
+                    <BedDouble className="h-4 w-4 shrink-0 text-hotel-accent" />
                     <span className="text-sm">{room.beds}</span>
                   </div>
                   <div className="flex items-center gap-3 text-slate-700">
-                    <Users className="w-4 h-4 text-hotel-accent" />
+                    <Users className="h-4 w-4 shrink-0 text-hotel-accent" />
                     <span className="text-sm">{room.capacity}</span>
                   </div>
                 </div>
 
-                <div className="mb-8">
-                  <p className="text-slate-500 text-xs tracking-widest uppercase mb-3">Includes</p>
-                  <div className="flex flex-wrap gap-3">
+                <div>
+                  <p className="mb-3 text-xs uppercase tracking-widest text-slate-500">Includes</p>
+                  <div className="flex flex-wrap gap-2">
                     {room.amenities.map((a) => (
                       <div
                         key={a}
-                        className="flex items-center gap-2 border border-slate-200 bg-hotel-page text-xs text-slate-600 px-3 py-2 transition-colors duration-300 hover:border-hotel-accent/50"
+                        className="flex items-center gap-2 border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600 transition-colors duration-300 hover:border-hotel-accent/50"
                       >
                         <span className="text-hotel-accent">{amenityIcons[a]}</span>
                         {a}
@@ -106,49 +103,16 @@ export default function Rooms() {
                   </div>
                 </div>
 
-                <p className="text-slate-400 text-xs mb-6">
-                  * Extra Rs.1,500/- charged for additional Mattress & Breakfast
-                </p>
+                <a
+                  href={`https://wa.me/923111556691?text=Hello! I'd like to book the ${encodeURIComponent(room.name)} at Stay O'Clock Hotel, Skardu.`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-hotel-accent py-4 text-center text-xs font-bold uppercase tracking-widest text-black transition-all duration-300 hover:bg-hotel-accent-hover hover:shadow-[0_0_20px_rgba(201,160,68,0.4)]"
+                >
+                  Book This Room via WhatsApp
+                </a>
               </div>
-
-              <a
-                href={`https://wa.me/923111556691?text=Hello! I'd like to book the ${encodeURIComponent(room.name)} at Stay O'Clock Hotel, Skardu.`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-hotel-accent hover:bg-hotel-accent-hover text-black font-bold text-xs tracking-widest uppercase px-6 py-4 transition-all duration-300 text-center hover:shadow-[0_0_20px_rgba(201,160,68,0.4)]"
-              >
-                Book This Room via WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <button
-            onClick={() => go("left")}
-            className="absolute left-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-slate-800/80 text-white transition-all duration-300 hover:bg-hotel-accent hover:text-black"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-          <button
-            onClick={() => go("right")}
-            className="absolute right-4 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center bg-slate-800/80 text-white transition-all duration-300 hover:bg-hotel-accent hover:text-black"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-        </div>
-
-        <div className="flex justify-center gap-3 mt-8">
-          {rooms.map((r, i) => (
-            <button
-              key={i}
-              onClick={() => { setDirection(i > active ? "right" : "left"); setActive(i); }}
-              className={`text-xs tracking-widest uppercase py-2 px-4 border transition-all duration-300 ${
-                i === active
-                  ? "border-hotel-accent bg-hotel-accent/15 text-hotel-accent-muted"
-                  : "border-slate-300 text-slate-500 hover:border-slate-400"
-              }`}
-            >
-              {r.name}
-            </button>
+            </article>
           ))}
         </div>
       </div>

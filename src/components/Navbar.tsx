@@ -21,39 +21,58 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
+
   const handleNav = (href: string) => {
     setMenuOpen(false);
     document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const linkClass = scrolled
+  const onLightBar = scrolled || menuOpen;
+  const linkClass = onLightBar
     ? "text-slate-600 hover:text-hotel-accent"
     : "text-white/85 hover:text-hotel-accent";
-  const brandMain = scrolled ? "text-slate-800" : "text-white";
-  const brandSub = scrolled ? "text-hotel-accent-muted" : "text-hotel-accent/80";
-  const iconBtn = scrolled ? "text-slate-800" : "text-white";
+  const brandMain = onLightBar ? "text-slate-800" : "text-white";
+  const brandSub = onLightBar ? "text-hotel-accent-muted" : "text-hotel-accent/80";
+  const iconBtn = onLightBar ? "text-slate-800" : "text-white";
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? "border-b border-slate-200/90 bg-hotel-page/95 py-3 shadow-md backdrop-blur-md"
-          : "bg-transparent py-5"
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-500 ${
+        menuOpen
+          ? "border-b border-slate-200 bg-hotel-page py-3 shadow-lg"
+          : scrolled
+            ? "border-b border-slate-200/90 bg-hotel-page/95 py-3 shadow-md backdrop-blur-md"
+            : "bg-transparent py-5"
       }`}
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6">
         <button
+          type="button"
           onClick={() => handleNav("#home")}
           className="group flex items-center gap-3"
         >
-          <img
-            src="/logo.png"
-            alt=""
-            className="h-10 w-auto max-w-[min(140px,42vw)] shrink-0 object-contain object-left"
-            width={140}
-            height={40}
-            decoding="async"
-          />
+          <div
+            className={`flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 shadow-sm ${
+              onLightBar ? "border-slate-200 bg-white" : "border-white/50 bg-black/25 backdrop-blur-sm"
+            }`}
+          >
+            <img
+              src="/logo.png"
+              alt=""
+              className="h-full w-full object-contain p-1.5"
+              width={44}
+              height={44}
+              decoding="async"
+            />
+          </div>
           <div className="leading-tight">
             <span className={`block text-lg font-bold uppercase tracking-widest ${brandMain}`}>
               Stay <span className="text-hotel-accent">O'Clock</span>
@@ -68,6 +87,7 @@ export default function Navbar() {
           {navLinks.map((link) => (
             <li key={link.label}>
               <button
+                type="button"
                 onClick={() => handleNav(link.href)}
                 className={`group relative text-sm uppercase tracking-widest transition-colors duration-300 ${linkClass}`}
               >
@@ -87,30 +107,37 @@ export default function Navbar() {
           Book Now
         </a>
 
-        <button className={`md:hidden ${iconBtn}`} onClick={() => setMenuOpen(!menuOpen)}>
+        <button
+          type="button"
+          className={`md:hidden ${iconBtn}`}
+          aria-expanded={menuOpen}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
           {menuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </div>
 
       {menuOpen && (
-        <div className="border-t border-slate-200 bg-hotel-page/98 backdrop-blur-md md:hidden">
-          <ul className="flex flex-col gap-4 px-6 py-4">
+        <div className="border-t border-slate-200/80 bg-white md:hidden">
+          <ul className="flex flex-col px-4 py-3 sm:px-6">
             {navLinks.map((link) => (
-              <li key={link.label}>
+              <li key={link.label} className="border-b border-slate-100">
                 <button
+                  type="button"
                   onClick={() => handleNav(link.href)}
-                  className="w-full text-left text-sm uppercase tracking-widest text-slate-700 transition-colors duration-300 hover:text-hotel-accent"
+                  className="w-full py-3.5 text-left text-sm font-semibold uppercase tracking-[0.2em] text-slate-900 transition-colors hover:text-hotel-accent-muted active:text-hotel-accent"
                 >
                   {link.label}
                 </button>
               </li>
             ))}
-            <li>
+            <li className="pt-3">
               <a
                 href={`https://wa.me/${hotelInfo.whatsapp}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 block bg-hotel-accent px-5 py-3 text-center text-xs font-semibold uppercase tracking-widest text-black"
+                className="block bg-hotel-accent px-5 py-3.5 text-center text-xs font-bold uppercase tracking-widest text-black transition-colors hover:bg-hotel-accent-hover"
               >
                 Book Now via WhatsApp
               </a>
