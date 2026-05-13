@@ -61,7 +61,7 @@ export default function Navbar() {
         >
           <div
             className={`flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden rounded-full border-2 shadow-sm ${
-              onLightBar ? "border-slate-200 bg-white" : "border-white/50 bg-black/25 backdrop-blur-sm"
+              onLightBar ? "border-slate-200 bg-hotel-card" : "border-white/50 bg-black/25 backdrop-blur-sm"
             }`}
           >
             <img
@@ -119,7 +119,7 @@ export default function Navbar() {
       </div>
 
       {menuOpen && (
-        <div className="border-t border-slate-200/80 bg-white md:hidden">
+        <div className="border-t border-slate-200/80 bg-hotel-card md:hidden">
           <ul className="flex flex-col px-4 py-3 sm:px-6">
             {navLinks.map((link) => (
               <li key={link.label} className="border-b border-slate-100">

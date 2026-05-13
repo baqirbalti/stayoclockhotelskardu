@@ -49,7 +49,7 @@ export default function Rooms() {
           {rooms.map((room) => (
             <article
               key={room.id}
-              className="overflow-hidden rounded-xl border border-slate-200/80 bg-white shadow-md shadow-slate-200/50"
+              className="overflow-hidden rounded-xl border border-slate-200/80 bg-hotel-card shadow-md shadow-slate-200/50"
             >
               <div className="relative aspect-[16/10] w-full overflow-hidden bg-slate-100 md:aspect-[2/1]">
                 <RoomImage roomId={room.id} src={room.image} alt={room.name} />

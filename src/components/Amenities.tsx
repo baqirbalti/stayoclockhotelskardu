@@ -38,7 +38,7 @@ export default function Amenities() {
           {amenities.map((item) => (
             <div
               key={item.title}
-              className="group border border-slate-200 bg-white/90 p-8 shadow-sm transition-all duration-400 hover:border-hotel-accent/60"
+              className="group border border-slate-200 bg-hotel-card/90 p-8 shadow-sm transition-all duration-400 hover:border-hotel-accent/60"
             >
               <div className="w-12 h-12 rounded-full border border-hotel-accent/30 flex items-center justify-center text-hotel-accent mb-5 group-hover:border-hotel-accent group-hover:bg-hotel-accent/10 transition-all duration-300">
                 {iconMap[item.icon]}

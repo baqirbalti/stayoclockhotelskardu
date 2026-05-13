@@ -45,7 +45,7 @@ export default function Gallery() {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-slate-200/90 bg-white p-4 shadow-lg shadow-slate-200/60 sm:p-6 md:p-8">
+        <div className="rounded-2xl border border-slate-200/90 bg-hotel-card p-4 shadow-lg shadow-slate-200/60 sm:p-6 md:p-8">
           <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-5 lg:grid-cols-3 lg:gap-6">
             {galleryImages.map((img, i) => {
               const isWide = img.span === "col-span-2";
@@ -68,7 +68,7 @@ export default function Gallery() {
                   key={i}
                   type="button"
                   onClick={() => setLightbox(img.src)}
-                  className={`group flex w-full flex-col overflow-hidden rounded-xl border border-slate-200/80 bg-white text-left shadow-md shadow-slate-200/40 transition-shadow duration-300 hover:border-hotel-accent/40 hover:shadow-lg ${colClass}`}
+                  className={`group flex w-full flex-col overflow-hidden rounded-xl border border-slate-200/80 bg-hotel-card text-left shadow-md shadow-slate-200/40 transition-shadow duration-300 hover:border-hotel-accent/40 hover:shadow-lg ${colClass}`}
                 >
                   <div className={`relative w-full overflow-hidden bg-slate-100 ${aspectClass}`}>
                     <GalleryImage index={i} src={img.src} alt={img.alt} />

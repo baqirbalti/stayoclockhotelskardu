@@ -20,8 +20,8 @@ export default function Pricing() {
               key={room.id}
               className={`group relative border transition-all duration-300 hover:-translate-y-1 ${
                 room.featured
-                  ? "border-hotel-accent bg-gradient-to-b from-hotel-accent/12 to-white shadow-md"
-                  : "border-slate-200 bg-white hover:border-hotel-accent/50"
+                  ? "border-hotel-accent bg-gradient-to-b from-hotel-accent/12 to-hotel-card shadow-md"
+                  : "border-slate-200 bg-hotel-card hover:border-hotel-accent/50"
               }`}
             >
               {room.featured && (

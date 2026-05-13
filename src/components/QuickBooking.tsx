@@ -31,7 +31,7 @@ function addDays(iso: string, days: number) {
 }
 
 const fieldBox =
-  "w-full rounded-lg border border-slate-200/90 bg-white px-3 py-2.5 text-sm text-slate-700 shadow-sm outline-none transition-shadow focus:border-hotel-accent/60 focus:ring-2 focus:ring-hotel-accent/20";
+  "w-full rounded-lg border border-slate-200/90 bg-hotel-card px-3 py-2.5 text-sm text-slate-700 shadow-sm outline-none transition-shadow focus:border-hotel-accent/60 focus:ring-2 focus:ring-hotel-accent/20";
 
 export default function QuickBooking() {
   const minIn = todayISODate();
@@ -71,7 +71,7 @@ export default function QuickBooking() {
       aria-label="Quick booking"
     >
       <div className="mx-auto max-w-6xl">
-        <div className="rounded-2xl border border-slate-200/60 bg-white p-5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] sm:p-7 md:p-8">
+        <div className="rounded-2xl border border-slate-200/60 bg-hotel-card p-5 shadow-[0_12px_40px_-12px_rgba(0,0,0,0.12)] sm:p-7 md:p-8">
           <p className="mb-5 text-xs font-semibold tracking-[0.35em] text-hotel-accent">QUICK BOOKING</p>
 
           <div className="flex flex-col gap-6">

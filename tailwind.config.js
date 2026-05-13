@@ -5,8 +5,9 @@ export default {
     extend: {
       colors: {
         hotel: {
-          page: '#f4efe6',
-          section: '#e8dfd2',
+          page: '#fdf9f0',
+          section: '#efe6d6',
+          card: '#fffbf5',
           footer: '#1f2329',
           accent: '#c9a044',
           'accent-hover': '#ae8e38',

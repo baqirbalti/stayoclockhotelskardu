@@ -21,7 +21,7 @@ export default function Terms() {
             return (
               <div
                 key={i}
-                className="flex gap-4 border border-slate-200 bg-white/90 p-6 shadow-sm transition-colors duration-300 hover:border-hotel-accent/40"
+                className="flex gap-4 border border-slate-200 bg-hotel-card/90 p-6 shadow-sm transition-colors duration-300 hover:border-hotel-accent/40"
               >
                 <div className="w-9 h-9 rounded-full border border-hotel-accent/30 flex items-center justify-center flex-shrink-0 mt-0.5">
                   <Icon className="w-4 h-4 text-hotel-accent" />

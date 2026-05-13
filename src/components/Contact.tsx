@@ -31,7 +31,7 @@ export default function Contact() {
               </a>
               <a
                 href={pkPhoneTelHref(primaryPhone)}
-                className="flex items-center justify-center gap-3 border border-slate-300 bg-white/80 font-semibold text-sm uppercase tracking-widest text-slate-800 transition-all duration-300 hover:border-hotel-accent hover:text-hotel-accent whitespace-nowrap px-8 py-4"
+                className="flex items-center justify-center gap-3 border border-slate-300 bg-hotel-card/90 font-semibold text-sm uppercase tracking-widest text-slate-800 transition-all duration-300 hover:border-hotel-accent hover:text-hotel-accent whitespace-nowrap px-8 py-4"
               >
                 <Phone className="w-5 h-5" />
                 {primaryPhone}
