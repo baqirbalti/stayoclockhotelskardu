@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://stayoclockhotelskardu.vercel.app/sitemap.xml
+Sitemap: https://stayoclockskardu.com/sitemap.xml
